@@ -299,7 +299,7 @@ const scenarios={
     type:"message",
     notif:{app:"sms", sender:"CJ대한통운", prev:"[Web발신] 고객님 택배가 주소 불일치로 배송 보류 중입니다. 오늘까지 확인하지 않으면 반송됩니다.", time:"지금"},
     app:{who:"1588-0000", small:"문자 메시지"}, kakao:false, time:"오후 2:14",
-    thread:`<div class="recv"><div class="webno">[Web발신]</div><div class="bubble">고객님, 택배가 <b>주소 불일치</b>로 배송 보류 중입니다. 오늘까지 확인하지 않으면 반송됩니다.<br><br>▶ 주소확인<br><span class="link">http://cj-delivery-check.info</span></div><div class="time">오후 2:14</div></div>`,
+    thread:`<div class="recv"><div class="webno">[Web발신]</div><div class="bubble">고객님, 택배가 <b>주소 불일치</b>로 배송 보류 중입니다. 오늘까지 확인하지 않으면 반송됩니다.<br><br>▶ <span class="link">주소확인</span><br><span class="link">http://cj-delivery-check.info</span></div><div class="time">오후 2:14</div></div>`,
     baitBtn:"링크 눌러서 주소 확인하기",
     formTitle:"택배 주소 확인 센터", formSub:"본인 확인 후 배송지를 수정하세요",
     fields:[{label:"이름", value:"홍길동"},{label:"생년월일", value:"1951 - 03 - 02"},{label:"휴대폰 번호", value:"010 - 1234 - 5678"},{label:"배송비 결제 카드번호", value:"4321 - 8765 - 1234 - 0000"}],
@@ -310,7 +310,7 @@ const scenarios={
     type:"message",
     notif:{app:"sms", sender:"국민지원금 안내", prev:"[국민지원금] 미신청 지원금 25만원이 있습니다. 10월 31일까지 신청하지 않으면 소멸됩니다.", time:"지금"},
     app:{who:"국번없음", small:"문자 메시지"}, kakao:false, time:"오전 10:03",
-    thread:`<div class="recv"><div class="bubble">[국민지원금 안내]<br>고객님께 <b>미신청 지원금 25만원</b>이 있습니다. 10월 31일까지 신청하지 않으면 소멸됩니다.<br><br>▶ 신청하기<br><span class="link">http://gov-support-kr.com</span></div><div class="time">오전 10:03</div></div>`,
+    thread:`<div class="recv"><div class="bubble">[국민지원금 안내]<br>고객님께 <b>미신청 지원금 25만원</b>이 있습니다. 10월 31일까지 신청하지 않으면 소멸됩니다.<br><br>▶ <span class="link">신청하기</span><br><span class="link">http://gov-support-kr.com</span></div><div class="time">오전 10:03</div></div>`,
     baitBtn:"링크 눌러서 지원금 신청하기",
     formTitle:"국민지원금 신청", formSub:"수령 계좌를 인증해 주세요",
     fields:[{label:"이름", value:"홍길동"},{label:"주민등록번호", value:"510302 - 1******"},{label:"수령 은행 / 계좌번호", value:"○○은행 123-45-678900"},{label:"계좌 비밀번호", value:"● ● ● ●"}],
@@ -402,6 +402,11 @@ function selectScenario(key){
   const t=document.getElementById('thread');
   t.className='thread'+(current.kakao?' kakao':'');
   t.innerHTML=current.thread;
+  // 메시지 속 링크를 직접 눌러도 가짜 폼으로 넘어가게
+  t.querySelectorAll('.link').forEach(function(a){
+    a.style.cursor='pointer';
+    a.addEventListener('click',function(e){e.preventDefault();goToForm();});
+  });
   document.getElementById('appTop').innerHTML=`<span class="back">‹</span><span class="who">${current.app.who}${current.app.small?`<small>${current.app.small}</small>`:''}</span>`;
   document.getElementById('baitTime').textContent=current.time;
   document.getElementById('baitBtn').textContent=current.baitBtn;
