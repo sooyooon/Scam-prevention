@@ -201,6 +201,7 @@
           <div class="caption-label">통화 내용</div>
           <div class="caption" id="caption"></div>
         </div>
+        <audio id="callAudio" preload="auto" playsinline></audio>
       </div>
     </div></div>
     <div class="btns phonebtns">
@@ -329,30 +330,35 @@ const scenarios={
   },
   voicecall:{
     type:"call",
-    notif:{app:"call", sender:"아들", prev:"전화 수신 중… 받으려면 누르세요", time:"지금"},
-    app:{who:"아들"},
+    notif:{app:"call", sender:"손주", prev:"전화 수신 중… 받으려면 누르세요", time:"지금"},
+    app:{who:"손주"},
+    // 재생할 음성 파일 (저장소에 올린 mp3 파일명). 없으면 자막만 흐릅니다.
+    audioFile:"voice.mp3",
+    // 자막 — 음성 내용에 맞춰 줄 단위로. 타이밍은 아래 lineSeconds(한 줄 기본 노출 시간)로 조절.
     callScript:[
-      "엄마… 엄마 나야. 흑흑…",
-      "나 지금 교통사고가 크게 났어.",
-      "상대방이 합의 안 해주면 나 경찰서 가야 한대…",
-      "내 폰이 박살나서 친구 번호로 전화하는 거야.",
-      "엄마, 합의금 오백만 원만 지금 바로 보내줘.",
-      "이 계좌로… 빨리, 제발 엄마…"
+      "할머니… 저예요. 흑흑…",
+      "저 지금 큰일 났어요.",
+      "친구 돈을 잘못 건드려서… 지금 못 갚으면 경찰에 신고당해요.",
+      "제 폰이 고장 나서 이 번호로 연락하는 거예요.",
+      "할머니, 이백만 원만 지금 이 계좌로 보내주세요.",
+      "엄마 아빠한텐 절대 말하지 마세요… 제발요 할머니…"
     ],
+    lineSeconds:3.2,
     overlayTitle:"방금 그 목소리는<br>가짜였습니다",
     overlaySub:"AI가 만들어 낸 ‘딥보이스’입니다.",
-    reliefTitle:"놀라셨죠? 그건 아드님이 아니었어요",
-    reliefBody:"방금 들은 목소리는 AI가 만든 가짜, <b>‘딥보이스’</b>입니다. 몇 초 분량의 목소리만 있으면 이렇게 흉내 낼 수 있어요. 진짜였다면 사고 합의금 명목으로 <b>큰돈을 보냈을</b> 겁니다.",
+    reliefTitle:"놀라셨죠? 그건 손주가 아니었어요",
+    reliefBody:"방금 들은 목소리는 AI가 만든 가짜, <b>‘딥보이스’</b>입니다. 몇 초 분량의 목소리만 있으면 이렇게 손주 목소리까지 흉내 낼 수 있어요. 진짜였다면 사기범 계좌로 <b>큰돈을 보냈을</b> 겁니다.",
     leakHead:"하마터면 이렇게 될 뻔했어요",
-    leaks:["사고 합의금 명목 거액 송금","사기범 계좌로 이체","가족 확인 없이 급하게 처리"],
+    leaks:["급한 사정 명목 거액 송금","사기범 계좌로 이체","가족에게 확인 않고 처리"],
     flagHead:"이게 딥보이스 사기라는 신호였습니다",
     flags:[
       "울먹이며 다급하게 몰아붙여 <b>생각할 틈</b>을 주지 않습니다.",
       "<b>‘폰이 고장 나서’</b> 낯선 번호로 걸려 옵니다.",
       "곧바로 <b>돈·계좌 이체</b>를 요구합니다.",
+      "<b>‘부모님껜 말하지 말라’</b>며 다른 가족 확인을 막습니다.",
       "<b>‘우리만 아는 것’</b>을 되물으면 얼버무리거나 끊습니다."
     ],
-    tip:"가족끼리 전화로만 통하는 ‘우리만의 암호’ 한마디를 미리 정해 두면, 이런 전화를 바로 가려낼 수 있어요.",
+    tip:"가족끼리 전화로만 통하는 ‘우리만의 암호’ 한마디를 미리 정해 두면, 이런 전화를 바로 가려낼 수 있어요. 그리고 전화를 끊고 <b>평소 알던 번호로 다시 걸어</b> 확인하세요.",
     extra:{
       title:"비슷한 수법 — 딥페이크 영상은 이렇게 구별해요",
       items:[
@@ -411,17 +417,6 @@ function goToForm(){
 }
 
 /* ---- 전화 ---- */
-function speak(text){
-  try{
-    const synth=window.speechSynthesis; if(!synth) return;
-    const u=new SpeechSynthesisUtterance(text);
-    u.lang='ko-KR'; u.rate=0.98; u.pitch=1.0;
-    const vs=synth.getVoices();
-    const ko=vs.find(v=>v.lang&&v.lang.toLowerCase().indexOf('ko')===0);
-    if(ko) u.voice=ko;
-    synth.speak(u);
-  }catch(e){}
-}
 function answerCall(){
   document.getElementById('incallName').textContent=current.app.who;
   show('incall');
@@ -430,24 +425,35 @@ function answerCall(){
   const tEl=document.getElementById('callTimer'); tEl.textContent="00:00";
   clearInterval(callState.timer);
   callState.timer=setInterval(()=>{callState.seconds++;const m=String(Math.floor(callState.seconds/60)).padStart(2,'0');const s=String(callState.seconds%60).padStart(2,'0');tEl.textContent=m+":"+s;},1000);
-  // 자막 + 음성 (첫 줄은 탭 제스처 안에서 바로 재생 → iOS 음성 잠금 해제)
-  const cap=document.getElementById('caption');
+  // 음성 파일 재생 (탭 제스처 안에서 바로 호출 → iOS 재생 잠금 해제)
+  const audio=document.getElementById('callAudio');
   callState.timeouts.forEach(clearTimeout); callState.timeouts=[];
-  try{window.speechSynthesis.cancel();}catch(e){}
+  if(current.audioFile){
+    audio.src=current.audioFile;
+    audio.currentTime=0;
+    const p=audio.play();
+    if(p&&p.catch) p.catch(function(){ /* 재생 차단 시 자막만 진행 */ });
+  }
+  // 자막 — 줄 단위로 흐르게
+  const cap=document.getElementById('caption');
   const lines=current.callScript;
-  cap.textContent=lines[0]; speak(lines[0]);
-  let delay=1600+lines[0].length*150;
+  const per=(current.lineSeconds||3.2)*1000;
+  cap.textContent=lines[0];
+  let delay=per;
   for(let i=1;i<lines.length;i++){
     const line=lines[i];
-    const to=setTimeout(()=>{cap.textContent=line;speak(line);},delay);
+    const to=setTimeout(function(){cap.textContent=line;},delay);
     callState.timeouts.push(to);
-    delay+=1600+line.length*150;
+    delay+=per;
   }
+}
+function stopAudio(){
+  try{const a=document.getElementById('callAudio');a.pause();a.currentTime=0;}catch(e){}
 }
 function endCall(){
   clearInterval(callState.timer);
   callState.timeouts.forEach(clearTimeout); callState.timeouts=[];
-  try{window.speechSynthesis.cancel();}catch(e){}
+  stopAudio();
   reveal();
 }
 
@@ -497,13 +503,10 @@ function showLesson(){
 function restart(){
   clearInterval(callState.timer);
   callState.timeouts.forEach(clearTimeout); callState.timeouts=[];
-  try{window.speechSynthesis.cancel();}catch(e){}
+  stopAudio();
   document.getElementById('overlay').classList.remove('on');
   show('home');
 }
-
-/* 음성 목록 미리 로드 */
-try{window.speechSynthesis.getVoices();window.speechSynthesis.onvoiceschanged=function(){};}catch(e){}
 </script>
 </body>
 </html>
