@@ -7,8 +7,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
   :root{
-    --ink:#16213a;--ink-2:#48525f;--bg:#e6e9ee;--panel:#ffffff;--line:#d4d8e0;
-    --red:#d62f24;--red-deep:#a81f16;--safe:#18764e;--kakao-bg:#9bbbd6;--amber:#b4820e;
+    --ink:#243B6B;--ink-2:#53607a;--bg:#F7F2E8;--panel:#ffffff;--line:#e4ddcd;
+    --red:#d62f24;--red-deep:#a81f16;--safe:#4f7d5e;--sage:#A8C5A0;--kakao-bg:#9bbbd6;--amber:#b4820e;
   }
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
   html,body{margin:0;padding:0;}
@@ -38,7 +38,7 @@
   .statusbar.dark{color:#fff;}
 
   /* 잠금화면 */
-  .lockscreen{background:linear-gradient(170deg,#243049 0%,#121a2b 60%,#0c1220 100%);padding-bottom:20px;min-height:430px;}
+  .lockscreen{background:linear-gradient(170deg,#2d4a82 0%,#1d3159 55%,#152442 100%);padding-bottom:20px;min-height:430px;}
   .lock-clock{text-align:center;color:#fff;padding:26px 0 24px;}
   .lock-clock .date{font-size:15px;color:#c3cbd9;font-weight:500;letter-spacing:.2px;}
   .lock-clock .time{font-size:62px;font-weight:700;letter-spacing:-2px;line-height:1.05;margin-top:2px;}
@@ -72,7 +72,7 @@
   .phonebtns{margin-top:14px;}
 
   /* 전화 수신 화면 */
-  .callscreen{background:linear-gradient(170deg,#243049,#0c1220);min-height:430px;display:flex;flex-direction:column;align-items:center;color:#fff;padding:40px 20px 28px;}
+  .callscreen{background:linear-gradient(170deg,#2d4a82,#152442);min-height:430px;display:flex;flex-direction:column;align-items:center;color:#fff;padding:40px 20px 28px;}
   .call-label{font-size:15px;color:#aeb8c8;letter-spacing:.3px;}
   .caller-name{font-size:40px;font-weight:700;letter-spacing:-1px;margin-top:10px;}
   .call-sub{font-size:16px;color:#c3cbd9;margin-top:8px;}
@@ -86,7 +86,7 @@
   @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
 
   /* 통화중 화면 */
-  .incallscreen{background:linear-gradient(170deg,#1c2740,#0a0f1a);min-height:430px;display:flex;flex-direction:column;align-items:center;color:#fff;padding:36px 22px 26px;}
+  .incallscreen{background:linear-gradient(170deg,#243b6b,#101d38);min-height:430px;display:flex;flex-direction:column;align-items:center;color:#fff;padding:36px 22px 26px;}
   .incallscreen .caller-name{font-size:30px;margin-top:4px;}
   .calltimer{font-size:16px;color:#9fd8b4;margin-top:6px;letter-spacing:1px;}
   .speaker-pulse{margin:26px 0 20px;width:76px;height:76px;border-radius:50%;background:rgba(120,200,160,.14);display:flex;align-items:center;justify-content:center;font-size:36px;animation:pulse 1.1s ease-in-out infinite;}
@@ -134,7 +134,7 @@
 
   /* 대처법 큰 카드 */
   .howto{display:flex;flex-direction:column;gap:12px;}
-  .howto .card{display:flex;align-items:center;gap:16px;background:#fff;border:2px solid #cfe6da;border-radius:16px;padding:16px 18px;}
+  .howto .card{display:flex;align-items:center;gap:16px;background:#fff;border:2px solid var(--sage);border-radius:16px;padding:16px 18px;}
   .howto .ic{width:62px;height:62px;border-radius:50%;background:var(--safe);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
   .howto .ic svg{width:32px;height:32px;stroke:#fff;}
   .howto .h{font-size:25px;font-weight:800;color:var(--ink);letter-spacing:-.7px;}
