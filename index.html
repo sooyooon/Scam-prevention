@@ -120,28 +120,55 @@
   /* 해설 */
   .brandline{display:flex;align-items:center;gap:8px;margin:14px 0 16px;color:var(--ink-2);font-size:14px;font-weight:600;}
   .brandline::before,.brandline::after{content:"";height:1px;background:var(--line);flex:1;}
-  .relief{background:var(--ink);color:#fff;border-radius:12px;padding:21px 20px;margin-bottom:16px;}
-  .relief .rt{font-size:21px;font-weight:800;letter-spacing:-.5px;margin-bottom:9px;display:flex;align-items:center;gap:9px;}
-  .relief p{font-size:16.5px;line-height:1.62;color:#d6dce6;margin:0;}
+  /* 안심 배너 */
+  .relief{background:var(--ink);color:#fff;border-radius:16px;padding:24px 20px;margin-bottom:26px;text-align:center;}
+  .relief .rt{font-size:24px;font-weight:800;letter-spacing:-.6px;margin-bottom:9px;display:flex;align-items:center;justify-content:center;gap:9px;}
+  .relief p{font-size:17.5px;line-height:1.55;color:#d6dce6;margin:0;}
   .relief b{color:#fff;}
-  .block{background:#fff;border:1px solid var(--line);border-radius:12px;padding:19px 18px;margin-bottom:14px;}
-  .block > h2{font-size:18px;font-weight:800;letter-spacing:-.4px;margin:0 0 13px;padding-bottom:11px;border-bottom:1.5px solid #eceef2;}
+
+  /* 섹션 제목 */
+  .sec-title{font-size:22px;font-weight:800;letter-spacing:-.6px;margin:0 0 14px;display:flex;align-items:center;gap:10px;color:var(--ink);}
+  .sec-title .bar{width:6px;height:24px;border-radius:3px;background:var(--safe);flex-shrink:0;}
+  .sec-title.warn .bar{background:var(--amber);}
+  .sec{margin-bottom:26px;}
+
+  /* 대처법 큰 카드 */
+  .howto{display:flex;flex-direction:column;gap:12px;}
+  .howto .card{display:flex;align-items:center;gap:16px;background:#fff;border:2px solid #cfe6da;border-radius:16px;padding:16px 18px;}
+  .howto .ic{width:62px;height:62px;border-radius:50%;background:var(--safe);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .howto .ic svg{width:32px;height:32px;stroke:#fff;}
+  .howto .h{font-size:25px;font-weight:800;color:var(--ink);letter-spacing:-.7px;}
+  .howto .d{font-size:16.5px;color:var(--ink-2);margin-top:2px;line-height:1.4;}
+
+  /* 신고 전화 큰 버튼 */
+  .calls{display:flex;flex-direction:column;gap:11px;}
+  .callbtn{display:flex;align-items:center;gap:15px;background:#fff;border:2px solid var(--line);border-radius:16px;padding:15px 18px;text-decoration:none;color:inherit;transition:transform .06s;}
+  .callbtn:active{transform:scale(.99);}
+  .callbtn.primary{border-color:var(--red);background:#fdf1f0;}
+  .callbtn .num{font-size:33px;font-weight:800;color:var(--ink);letter-spacing:.5px;width:82px;}
+  .callbtn.primary .num{color:var(--red-deep);}
+  .callbtn .lbl{font-size:16.5px;color:var(--ink-2);line-height:1.35;}
+  .callbtn .tel{margin-left:auto;width:48px;height:48px;border-radius:50%;background:var(--safe);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .callbtn.primary .tel{background:var(--red);}
+  .callbtn .tel svg{width:24px;height:24px;stroke:#fff;}
+
+  /* 사기 신호 — 짧게 */
+  .signals{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px;}
+  .signals li{display:flex;align-items:center;gap:14px;background:#fff;border:1.5px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:15px 16px;font-size:19px;font-weight:700;color:var(--ink);letter-spacing:-.4px;line-height:1.35;}
+  .signals .warnic{width:28px;height:28px;flex-shrink:0;stroke:var(--amber);}
+
+  /* 하마터면 넘어갈 뻔 — 태그 */
+  .leakwrap{background:#fdf1f0;border:1.5px solid #f3cfca;border-radius:16px;padding:17px 18px;}
+  .leakwrap .lw-title{font-size:16.5px;font-weight:700;color:var(--red-deep);margin-bottom:12px;}
   .leak{display:flex;flex-wrap:wrap;gap:8px;}
-  .leak span{background:#fbe9e7;color:var(--red-deep);font-size:15.5px;font-weight:600;padding:7px 13px;border-radius:7px;border:1px solid #f3cfca;}
-  .flags{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px;}
-  .flags li{display:flex;gap:12px;font-size:16.5px;line-height:1.5;}
-  .flags .dot{width:9px;height:9px;border-radius:50%;background:var(--amber);flex-shrink:0;margin-top:8px;}
-  .flags b{color:var(--amber);font-weight:700;}
-  .steps{list-style:none;margin:0;padding:0;counter-reset:s;display:flex;flex-direction:column;gap:13px;}
-  .steps li{display:flex;gap:13px;font-size:17px;line-height:1.5;}
-  .steps li::before{counter-increment:s;content:counter(s);background:var(--safe);color:#fff;font-weight:800;font-size:15px;width:28px;height:28px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
-  .steps b{font-weight:700;}
-  .step-tip{background:#eafaf4;border-radius:8px;padding:12px 14px;font-size:15.5px;color:#0b5e45;line-height:1.5;margin-top:14px;}
-  .calls .row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #eceef2;}
-  .calls .row:last-child{border-bottom:none;}
-  .calls .lbl{font-size:16px;color:var(--ink-2);}
-  .calls .num{font-size:24px;font-weight:800;color:var(--ink);letter-spacing:.5px;}
-  .urgent{background:#fbe9e7;border-radius:8px;padding:12px 14px;font-size:15px;color:var(--red-deep);line-height:1.5;margin-top:14px;}
+  .leak span{background:#fff;color:var(--red-deep);font-size:16px;font-weight:700;padding:8px 14px;border-radius:9px;border:1.5px solid #f0c3bd;}
+
+  /* 팁 */
+  .tipbox{display:flex;gap:12px;background:#eef6ff;border:1.5px solid #cfe0f5;border-radius:16px;padding:17px 18px;font-size:16.5px;color:#1a4a7a;line-height:1.5;}
+  .tipbox .ti{flex-shrink:0;font-size:22px;line-height:1.2;}
+  .tipbox b{color:#123a63;}
+
+  .urgent{background:#fdf1f0;border:1.5px solid #f3cfca;border-radius:14px;padding:15px 16px;font-size:16px;color:var(--red-deep);line-height:1.5;text-align:center;}
 </style>
 </head>
 <body>
@@ -237,48 +264,67 @@
     <div class="brandline">AI를 구별하는 눈</div>
     <div class="relief">
       <div class="rt">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7fe3b4" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-        <span id="reliefTitle">놀라셨죠? 사실 이건 체험이었어요</span>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7fe3b4" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        <span id="reliefTitle">놀라셨죠? 체험이었어요</span>
       </div>
-      <p id="reliefBody">방금 겪은 건 실제 사기와 똑같이 만든 <b>연습</b>이었습니다. 입력한 정보는 어디에도 저장·전송되지 않았어요. 하지만 <b>진짜였다면</b> 아래 정보가 사기범 손에 넘어갔을 겁니다.</p>
+      <p id="reliefBody">방금 건 <b>연습</b>이었어요. 실제 정보는 빠져나가지 않았습니다.</p>
     </div>
 
-    <div class="block">
-      <h2 id="leakHead">넘어갈 뻔한 내 정보</h2>
-      <div class="leak" id="leakList"></div>
+    <!-- 대처법 (핵심) -->
+    <div class="sec">
+      <div class="sec-title"><span class="bar"></span>이렇게 하세요</div>
+      <div class="howto">
+        <div class="card">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V6.5a1.5 1.5 0 0 0-3 0V10"/><path d="M15 10V4.5a1.5 1.5 0 0 0-3 0V10"/><path d="M12 10.5V6a1.5 1.5 0 0 0-3 0v8"/><path d="M9 14l-1.3-2a1.6 1.6 0 0 0-2.7 1.7l2 3.5A6 6 0 0 0 14.5 21h.5a6 6 0 0 0 6-6v-4a1.5 1.5 0 0 0-3 0"/></svg></div>
+          <div><div class="h">멈춰요</div><div class="d">서두르라고 하면 일단 멈추기</div></div>
+        </div>
+        <div class="card">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></div>
+          <div><div class="h">확인해요</div><div class="d">끊고, 내가 아는 번호로 직접 전화</div></div>
+        </div>
+        <div class="card">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3L2.5 20h19L12 3z"/><line x1="12" y1="10" x2="12" y2="14"/><line x1="12" y1="17" x2="12" y2="17"/></svg></div>
+          <div><div class="h">신고해요</div><div class="d">조금이라도 당했으면 112</div></div>
+        </div>
+      </div>
     </div>
 
-    <div class="block">
-      <h2 id="flagHead">이게 사기라는 신호였습니다</h2>
-      <ul class="flags" id="flagList"></ul>
-    </div>
-
-    <div class="block" id="extraBlock" style="display:none;">
-      <h2 id="extraHead"></h2>
-      <ul class="flags" id="extraList"></ul>
-    </div>
-
-    <div class="block">
-      <h2>이렇게 대응하세요</h2>
-      <ul class="steps">
-        <li><div><b>멈추세요.</b> 급하게 재촉하면 일단 의심합니다. 진짜 기관·가족은 서두르라고만 하지 않습니다.</div></li>
-        <li><div><b>직접 확인하세요.</b> 문자 속 번호·링크는 누르지 말고, 끊은 뒤 평소 알던 공식 번호로 내가 먼저 전화해 확인합니다.</div></li>
-        <li><div><b>신고하세요.</b> 조금이라도 당했다면 즉시 아래로 신고·상담합니다.</div></li>
-      </ul>
-      <div class="step-tip" id="stepTip" style="display:none;"></div>
-    </div>
-
-    <div class="block">
-      <h2>신고·상담 전화</h2>
+    <!-- 신고 전화 -->
+    <div class="sec">
+      <div class="sec-title"><span class="bar"></span>여기로 전화하세요</div>
       <div class="calls">
-        <div class="row"><span class="lbl">경찰 · 보이스피싱 신고</span><span class="num">112</span></div>
-        <div class="row"><span class="lbl">금융감독원 상담</span><span class="num">1332</span></div>
-        <div class="row"><span class="lbl">불법스팸·해킹 신고 (KISA)</span><span class="num">118</span></div>
+        <a class="callbtn primary" href="tel:112"><span class="num">112</span><span class="lbl">경찰 · 보이스피싱 신고</span><span class="tel"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span></a>
+        <a class="callbtn" href="tel:1332"><span class="num">1332</span><span class="lbl">금융감독원 상담</span><span class="tel"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span></a>
+        <a class="callbtn" href="tel:118"><span class="num">118</span><span class="lbl">사이버·스팸 신고 (KISA)</span><span class="tel"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span></a>
       </div>
-      <div class="urgent">돈을 보냈거나 정보를 넘겼다면, 거래 은행 고객센터에 <b>즉시</b> 전화해 계좌 지급정지를 요청하세요.</div>
     </div>
 
-    <div class="btns"><button class="btn safe" onclick="restart()">다른 상황도 체험하기</button></div>
+    <!-- 사기 신호 -->
+    <div class="sec">
+      <div class="sec-title warn"><span class="bar"></span><span id="flagHead">이런 건 사기예요</span></div>
+      <ul class="signals" id="flagList"></ul>
+    </div>
+
+    <!-- 딥페이크 등 (전화 시나리오) -->
+    <div class="sec" id="extraBlock" style="display:none;">
+      <div class="sec-title warn"><span class="bar"></span><span id="extraHead"></span></div>
+      <ul class="signals" id="extraList"></ul>
+    </div>
+
+    <!-- 팁 -->
+    <div class="sec"><div class="tipbox" id="stepTip" style="display:none;"></div></div>
+
+    <!-- 하마터면 -->
+    <div class="sec">
+      <div class="leakwrap">
+        <div class="lw-title" id="leakHead">하마터면 이게 넘어갈 뻔했어요</div>
+        <div class="leak" id="leakList"></div>
+      </div>
+    </div>
+
+    <div class="urgent">돈을 보냈거나 정보를 넘겼다면, 거래 은행에 <b>바로</b> 전화해 계좌를 막으세요.</div>
+
+    <div class="btns"><button class="btn safe" onclick="restart()">다른 상황도 해보기</button></div>
   </section>
 
 </div>
@@ -304,7 +350,7 @@ const scenarios={
     formTitle:"택배 주소 확인 센터", formSub:"본인 확인 후 배송지를 수정하세요",
     fields:[{label:"이름", value:"홍길동"},{label:"생년월일", value:"1951 - 03 - 02"},{label:"휴대폰 번호", value:"010 - 1234 - 5678"},{label:"배송비 결제 카드번호", value:"4321 - 8765 - 1234 - 0000"}],
     leaks:["이름","생년월일","휴대폰 번호","신용카드 번호"],
-    flags:["<b>모르는 번호</b>가 보낸 문자입니다.","<b>‘오늘까지’</b>라며 급하게 재촉합니다.","주소가 cj-delivery-check.info — <b>진짜 택배사 주소가 아닙니다.</b>","주소 확인에 <b>카드번호</b>를 왜 물어볼까요? 이상합니다."],
+    flags:["낯선 번호가 보낸 문자예요","‘오늘까지’라며 재촉해요","주소 확인에 카드번호를 물어요"],
   },
   support:{
     type:"message",
@@ -315,7 +361,7 @@ const scenarios={
     formTitle:"국민지원금 신청", formSub:"수령 계좌를 인증해 주세요",
     fields:[{label:"이름", value:"홍길동"},{label:"주민등록번호", value:"510302 - 1******"},{label:"수령 은행 / 계좌번호", value:"○○은행 123-45-678900"},{label:"계좌 비밀번호", value:"● ● ● ●"}],
     leaks:["이름","주민등록번호","은행 계좌번호","계좌 비밀번호"],
-    flags:["정부는 <b>문자 링크로 지원금을 신청받지 않습니다.</b>","<b>‘소멸된다’</b>며 겁을 주고 서두르게 합니다.","주소가 gov-support-kr.com — <b>진짜 정부 사이트(go.kr)가 아닙니다.</b>","<b>계좌 비밀번호</b>는 그 어떤 기관도 묻지 않습니다."],
+    flags:["정부는 문자로 지원금 안 줘요","‘소멸된다’며 겁을 줘요","계좌 비밀번호를 물어요"],
   },
   family:{
     type:"message",
@@ -326,7 +372,7 @@ const scenarios={
     formTitle:"딸에게 전송", formSub:"빠르게 도와주세요",
     fields:[{label:"이름", value:"홍길동"},{label:"주민등록번호", value:"510302 - 2******"},{label:"계좌번호", value:"○○은행 123-45-678900"},{label:"인증번호 (OTP)", value:"0 0 0 0 0 0"}],
     leaks:["이름","주민등록번호","계좌번호","은행 인증번호(OTP)"],
-    flags:["<b>번호가 바뀌었다</b>며 새 번호로 유도합니다. 가장 흔한 수법입니다.","전화 통화는 피하고 <b>문자로만</b> 이야기하려 합니다.","가족이라도 <b>신분증·계좌·인증번호</b>를 요구하면 사기입니다.","<b>‘급하다’</b>는 말로 확인할 틈을 주지 않습니다."],
+    flags:["번호가 바뀌었다고 해요","전화는 피하고 문자만 해요","가족인데 계좌·인증번호를 물어요"],
   },
   voicecall:{
     type:"call",
@@ -346,27 +392,23 @@ const scenarios={
     lineSeconds:3.2,
     overlayTitle:"방금 그 목소리는<br>가짜였습니다",
     overlaySub:"AI가 만들어 낸 ‘딥보이스’입니다.",
-    reliefTitle:"놀라셨죠? 그건 손주가 아니었어요",
-    reliefBody:"방금 들은 목소리는 AI가 만든 가짜, <b>‘딥보이스’</b>입니다. 몇 초 분량의 목소리만 있으면 이렇게 손주 목소리까지 흉내 낼 수 있어요. 진짜였다면 사기범 계좌로 <b>큰돈을 보냈을</b> 겁니다.",
+    reliefTitle:"놀라셨죠? 손주가 아니었어요",
+    reliefBody:"방금 목소리는 AI가 만든 <b>가짜(딥보이스)</b>예요. 진짜였다면 큰돈을 보낼 뻔했습니다.",
     leakHead:"하마터면 이렇게 될 뻔했어요",
-    leaks:["급한 사정 명목 거액 송금","사기범 계좌로 이체","가족에게 확인 않고 처리"],
-    flagHead:"이게 딥보이스 사기라는 신호였습니다",
+    leaks:["큰돈 송금","사기범 계좌로 이체","가족 확인 없이 처리"],
+    flagHead:"이런 건 딥보이스 사기예요",
     flags:[
-      "울먹이며 다급하게 몰아붙여 <b>생각할 틈</b>을 주지 않습니다.",
-      "<b>‘폰이 고장 나서’</b> 낯선 번호로 걸려 옵니다.",
-      "곧바로 <b>돈·계좌 이체</b>를 요구합니다.",
-      "<b>‘부모님껜 말하지 말라’</b>며 다른 가족 확인을 막습니다.",
-      "<b>‘우리만 아는 것’</b>을 되물으면 얼버무리거나 끊습니다."
+      "폰이 고장났다며 낯선 번호로 걸어요",
+      "급하게 돈·계좌를 요구해요",
+      "‘부모님껜 말하지 마’라고 해요"
     ],
-    tip:"가족끼리 전화로만 통하는 ‘우리만의 암호’ 한마디를 미리 정해 두면, 이런 전화를 바로 가려낼 수 있어요. 그리고 전화를 끊고 <b>평소 알던 번호로 다시 걸어</b> 확인하세요.",
+    tip:"가족끼리 <b>‘우리만의 암호’</b>를 정해 두면, 이런 전화를 바로 가려낼 수 있어요.",
     extra:{
-      title:"비슷한 수법 — 딥페이크 영상은 이렇게 구별해요",
+      title:"딥페이크 영상은 이렇게 구별해요",
       items:[
-        "눈을 <b>부자연스럽게</b> 깜빡이거나 거의 깜빡이지 않습니다.",
-        "얼굴과 머리카락·턱 <b>경계가 번지거나</b> 일렁입니다.",
-        "<b>치아·귀·장신구</b>가 뭉개져 보입니다.",
-        "<b>입 모양과 말소리</b>가 미묘하게 어긋납니다.",
-        "얼굴만 <b>조명·그림자 방향</b>이 달라 보입니다."
+        "눈을 어색하게 깜빡여요",
+        "얼굴 경계가 번져요",
+        "입 모양과 소리가 안 맞아요"
       ]
     }
   },
@@ -481,27 +523,28 @@ function reveal(){
   softBeep();
 }
 
+const WARNIC='<svg class="warnic" viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12.5"/><line x1="12" y1="16" x2="12" y2="16"/></svg>';
 function showLesson(){
   document.getElementById('overlay').classList.remove('on');
-  document.getElementById('reliefTitle').innerHTML=current.reliefTitle||"놀라셨죠? 사실 이건 체험이었어요";
-  document.getElementById('reliefBody').innerHTML=current.reliefBody||"방금 겪은 건 실제 사기와 똑같이 만든 <b>연습</b>이었습니다. 입력한 정보는 어디에도 저장·전송되지 않았어요. 하지만 <b>진짜였다면</b> 아래 정보가 사기범 손에 넘어갔을 겁니다.";
-  document.getElementById('leakHead').textContent=current.leakHead||"넘어갈 뻔한 내 정보";
-  document.getElementById('flagHead').textContent=current.flagHead||"이게 사기라는 신호였습니다";
+  document.getElementById('reliefTitle').innerHTML=current.reliefTitle||"놀라셨죠? 체험이었어요";
+  document.getElementById('reliefBody').innerHTML=current.reliefBody||"방금 건 <b>연습</b>이었어요. 실제 정보는 빠져나가지 않았습니다.";
+  document.getElementById('leakHead').textContent=current.leakHead||"하마터면 이게 넘어갈 뻔했어요";
+  document.getElementById('flagHead').textContent=current.flagHead||"이런 건 사기예요";
   const leak=document.getElementById('leakList');leak.innerHTML='';
   current.leaks.forEach(x=>{const s=document.createElement('span');s.textContent=x;leak.appendChild(s);});
   const flag=document.getElementById('flagList');flag.innerHTML='';
-  current.flags.forEach(x=>{const li=document.createElement('li');li.innerHTML=`<span class="dot"></span><span>${x}</span>`;flag.appendChild(li);});
+  current.flags.forEach(x=>{const li=document.createElement('li');li.innerHTML=WARNIC+`<span>${x}</span>`;flag.appendChild(li);});
   // 추가 블록(딥페이크 등)
   const eb=document.getElementById('extraBlock');
   if(current.extra){
     document.getElementById('extraHead').textContent=current.extra.title;
     const el=document.getElementById('extraList');el.innerHTML='';
-    current.extra.items.forEach(x=>{const li=document.createElement('li');li.innerHTML=`<span class="dot"></span><span>${x}</span>`;el.appendChild(li);});
+    current.extra.items.forEach(x=>{const li=document.createElement('li');li.innerHTML=WARNIC+`<span>${x}</span>`;el.appendChild(li);});
     eb.style.display='';
   }else{eb.style.display='none';}
   // 팁
   const tip=document.getElementById('stepTip');
-  if(current.tip){tip.innerHTML="💡 "+current.tip;tip.style.display='';}else{tip.style.display='none';}
+  if(current.tip){tip.innerHTML='<span class="ti">💡</span><span>'+current.tip+'</span>';tip.style.display='';}else{tip.style.display='none';}
   show('lesson');
 }
 
