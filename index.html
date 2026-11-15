@@ -104,6 +104,18 @@
   .field label{display:block;font-size:15px;font-weight:700;color:#2c3645;margin-bottom:6px;}
   .field input{width:100%;font-family:inherit;font-size:17px;padding:12px 13px;border:1.5px solid var(--line);border-radius:8px;background:#fafbfc;color:#333;}
   .field input:read-only{cursor:default;}
+  /* 신분증 사진 첨부 */
+  .photofield{border:2px dashed var(--line);border-radius:8px;padding:20px 14px;text-align:center;cursor:pointer;background:#fafbfc;transition:border-color .14s;}
+  .photofield:active{border-color:var(--ink);}
+  .photofield .cam{font-size:30px;line-height:1;}
+  .photofield .pf-t{font-size:15px;color:var(--ink-2);margin-top:7px;font-weight:600;}
+  .photofield.attached{border-style:solid;border-color:var(--safe);padding:12px;background:#fff;cursor:default;}
+  .idcard{display:flex;gap:12px;align-items:center;background:#eef1f5;border:1px solid var(--line);border-radius:9px;padding:11px 12px;text-align:left;}
+  .idcard .photo{width:50px;height:62px;border-radius:6px;background:#c9d2de;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .idcard .photo svg{width:32px;height:32px;stroke:#8a97a8;}
+  .idcard .info{font-size:13px;color:#51607a;line-height:1.55;}
+  .idcard .info .t{font-weight:800;color:var(--ink);font-size:13.5px;letter-spacing:2px;margin-bottom:2px;}
+  .idcard .chk{margin-left:auto;color:var(--safe);font-weight:800;font-size:13px;flex-shrink:0;}
   .ssl{font-size:12.5px;color:#2a8a5f;text-align:center;margin-top:13px;display:flex;align-items:center;justify-content:center;gap:5px;font-weight:600;}
 
   /* 경고 오버레이 */
@@ -370,9 +382,9 @@ const scenarios={
     thread:`<div class="name">딸</div><div class="bubble">엄마 나야~ 폰 액정 깨져서 지금 수리 맡겼어. 이 번호로 톡해줘</div><div class="bubble">급하게 결제할 게 있는데 내 카드가 안 돼서… <b>신분증 사진이랑 계좌번호</b> 좀 보내줄 수 있어? 금방 갚을게!</div>`,
     baitBtn:"딸에게 정보 보내 주기",
     formTitle:"딸에게 전송", formSub:"빠르게 도와주세요",
-    fields:[{label:"이름", value:"홍길동"},{label:"주민등록번호", value:"510302-2******"},{label:"계좌번호", value:"○○은행 123-45-678900"},{label:"인증번호 (OTP)", value:"0 0 0 0 0 0"}],
-    leaks:["이름","주민등록번호","계좌번호","은행 인증번호(OTP)"],
-    flags:["번호가 바뀌었다고 해요","전화는 피하고 문자만 해요","가족인데 계좌·인증번호를 물어요"],
+    fields:[{label:"신분증 사진", photo:true},{label:"계좌번호", value:"○○은행 123-45-678900"}],
+    leaks:["신분증 사진","주민등록번호·주소","계좌번호"],
+    flags:["번호가 바뀌었다고 해요","전화는 피하고 문자만 해요","가족인데 신분증·계좌번호를 보내래요"],
   },
   voicecall:{
     type:"call",
@@ -459,8 +471,23 @@ function goToForm(){
   document.getElementById('formTitle').textContent=current.formTitle;
   document.getElementById('formSub').textContent=current.formSub;
   const box=document.getElementById('formFields');box.innerHTML='';
-  current.fields.forEach(f=>{const d=document.createElement('div');d.className='field';d.innerHTML=`<label>${f.label}</label><input placeholder="${f.value}" autocomplete="off" autocapitalize="off" spellcheck="false">`;box.appendChild(d);});
+  current.fields.forEach(f=>{const d=document.createElement('div');d.className='field';
+    if(f.photo){
+      d.innerHTML=`<label>${f.label}</label><div class="photofield" onclick="attachPhoto(this)"><span class="cam">📷</span><div class="pf-t">여기를 눌러 신분증 사진 첨부</div></div>`;
+    }else{
+      d.innerHTML=`<label>${f.label}</label><input placeholder="${f.value}" autocomplete="off" autocapitalize="off" spellcheck="false">`;
+    }
+    box.appendChild(d);});
   show('form');
+}
+
+function attachPhoto(el){
+  el.classList.add('attached');
+  el.onclick=null;
+  el.innerHTML='<div class="idcard">'
+    +'<div class="photo"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div>'
+    +'<div class="info"><div class="t">주 민 등 록 증</div>홍길동 (예시)<br>●●●●●●-●●●●●●●</div>'
+    +'<div class="chk">첨부됨</div></div>';
 }
 
 /* ---- 전화 ---- */
