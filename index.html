@@ -508,17 +508,34 @@ function answerCall(){
     const p=audio.play();
     if(p&&p.catch) p.catch(function(){ /* 재생 차단 시 자막만 진행 */ });
   }
-  // 자막 — 줄 단위로 흐르게
+  // 자막 — 음성 길이에 맞춰 문장 길이 비율대로 흐르게
   const cap=document.getElementById('caption');
   const lines=current.callScript;
-  const per=(current.lineSeconds||3.2)*1000;
   cap.textContent=lines[0];
-  let delay=per;
-  for(let i=1;i<lines.length;i++){
-    const line=lines[i];
-    const to=setTimeout(function(){cap.textContent=line;},delay);
-    callState.timeouts.push(to);
-    delay+=per;
+  function scheduleCaps(durMs){
+    callState.timeouts.forEach(clearTimeout); callState.timeouts=[];
+    const lens=lines.map(function(l){return Math.max((l||'').length,4);});
+    const total=lens.reduce(function(a,b){return a+b;},0);
+    let acc=0;
+    for(let i=1;i<lines.length;i++){
+      acc+=lens[i-1];
+      const t=(acc/total)*durMs;
+      const line=lines[i];
+      callState.timeouts.push(setTimeout(function(){cap.textContent=line;},t));
+    }
+  }
+  const fallbackMs=(current.lineSeconds||3.2)*1000*lines.length;
+  if(current.audioFile){
+    if(isFinite(audio.duration)&&audio.duration>0){
+      scheduleCaps(audio.duration*1000);
+    }else{
+      scheduleCaps(fallbackMs);
+      audio.addEventListener('loadedmetadata',function(){
+        scheduleCaps((isFinite(audio.duration)&&audio.duration>0?audio.duration*1000:fallbackMs));
+      },{once:true});
+    }
+  }else{
+    scheduleCaps(fallbackMs);
   }
 }
 function stopAudio(){
