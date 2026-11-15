@@ -459,7 +459,7 @@ function goToForm(){
   document.getElementById('formTitle').textContent=current.formTitle;
   document.getElementById('formSub').textContent=current.formSub;
   const box=document.getElementById('formFields');box.innerHTML='';
-  current.fields.forEach(f=>{const d=document.createElement('div');d.className='field';d.innerHTML=`<label>${f.label}</label><input value="${f.value}" readonly>`;box.appendChild(d);});
+  current.fields.forEach(f=>{const d=document.createElement('div');d.className='field';d.innerHTML=`<label>${f.label}</label><input placeholder="${f.value}" autocomplete="off" autocapitalize="off" spellcheck="false">`;box.appendChild(d);});
   show('form');
 }
 
