@@ -140,6 +140,13 @@
   .overlay h1{font-size:36px;line-height:1.25;color:#fff;margin-bottom:16px;letter-spacing:-1px;}
   .overlay .osub{font-size:18px;line-height:1.55;color:#ffdedb;max-width:320px;margin-bottom:30px;}
   .overlay .onext{background:#fff;color:var(--red-deep);border:none;font-family:inherit;font-size:20px;font-weight:700;padding:15px 30px;border-radius:10px;cursor:pointer;}
+  .overlay .ov-taphint{font-size:17px;color:#ffe3e0;font-weight:700;margin-bottom:14px;}
+  .overlay .onext.pulse{animation:tappulse 1.3s ease-in-out infinite;}
+  @keyframes tappulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(255,255,255,.5);}50%{transform:scale(1.04);box-shadow:0 0 0 12px rgba(255,255,255,0);}}
+  @media (prefers-reduced-motion:reduce){.overlay .onext.pulse{animation:none;}}
+  .read-down{text-align:center;font-size:16px;color:var(--ink-2);font-weight:600;margin:-8px 0 20px;}
+  .again-hint{text-align:center;font-size:17px;color:var(--ink);font-weight:600;line-height:1.5;margin:4px 0 12px;}
+  .again-hint b{color:var(--safe);}
 
   /* 해설 */
   .brandline{display:flex;align-items:center;gap:8px;margin:14px 0 16px;color:var(--ink-2);font-size:14px;font-weight:600;}
@@ -303,7 +310,8 @@
   <div id="overlay" class="overlay">
     <div class="shake"><div class="mark-x">✕</div><h1 id="ovTitle">당신의 정보가<br>유출되었습니다</h1></div>
     <p class="osub" id="ovSub">방금 입력한 정보가 모두<br>사기범에게 넘어갔습니다.</p>
-    <button class="onext" onclick="showLesson()">무슨 일이 일어났을까요?</button>
+    <div class="ov-taphint">👇 아래 단추를 눌러 주세요</div>
+    <button class="onext pulse" onclick="showLesson()">무슨 일이 일어났을까요?</button>
   </div>
 
   <!-- 5. 해설 -->
@@ -316,6 +324,7 @@
       </div>
       <p id="reliefBody">방금 건 <b>연습</b>이었어요. 실제 정보는 빠져나가지 않았습니다.</p>
     </div>
+    <div class="read-down">👇 아래로 내려가며 읽어 보세요</div>
 
     <!-- 대처법 (핵심) -->
     <div class="sec">
@@ -371,7 +380,8 @@
 
     <div class="urgent">돈을 보냈거나 정보를 넘겼다면, 거래 은행에 <b>바로</b> 전화해 계좌를 막으세요.</div>
 
-    <div class="btns"><button class="btn safe" onclick="restart()">다른 상황도 해보기</button></div>
+    <div class="again-hint">여기까지 다 읽으셨다면,<br><b>다른 사기도 겪어 보세요.</b> 아래 단추를 누르면 처음으로 돌아가요.</div>
+    <div class="btns"><button class="btn safe" onclick="restart()">👉 다른 상황도 해보기</button></div>
   </section>
 
 </div>
