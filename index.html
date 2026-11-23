@@ -116,6 +116,8 @@
   .field label{display:block;font-size:15px;font-weight:700;color:#2c3645;margin-bottom:6px;}
   .field input{width:100%;font-family:inherit;font-size:17px;padding:12px 13px;border:1.5px solid var(--line);border-radius:8px;background:#fafbfc;color:#333;}
   .field input:read-only{cursor:default;}
+  .demo-note{display:flex;gap:9px;background:#eef6ef;border:1.5px solid var(--sage);border-radius:11px;padding:13px 15px;font-size:15.5px;color:#1e3a29;line-height:1.55;font-weight:600;margin-bottom:17px;}
+  .demo-note .dn-ic{flex-shrink:0;}
   /* 신분증 사진 첨부 */
   .photofield{border:2px dashed var(--line);border-radius:8px;padding:20px 14px;text-align:center;cursor:pointer;background:#fafbfc;transition:border-color .14s;}
   .photofield:active{border-color:var(--ink);}
@@ -298,6 +300,7 @@
     <div class="formcard">
       <div class="head"><div class="ht" id="formTitle"></div><div class="hs" id="formSub"></div></div>
       <div class="body">
+        <div class="demo-note"><span class="dn-ic">✅</span><span>실제 사기가 아니에요. 여기 적어도 <b>저장되거나 전송되지 않으니</b>, 걱정 말고 체험만 해보세요.</span></div>
         <div id="formFields"></div>
         <button class="btn red" onclick="reveal()" style="margin-top:6px;">제출하기</button>
         <div class="ssl">
