@@ -52,7 +52,19 @@
   .notif .ntime{margin-left:auto;font-size:12px;color:#8a92a0;}
   .notif .nsender{font-size:16px;font-weight:700;color:#1a2233;margin-bottom:1px;}
   .notif .nprev{font-size:14.5px;color:#49525f;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
-  .swipe-hint{text-align:center;color:#aab4c6;font-size:13px;margin-top:18px;letter-spacing:.3px;}
+  .swipe-hint{text-align:center;color:#cdd6e4;font-size:16px;font-weight:600;margin-top:18px;letter-spacing:.2px;}
+  /* 시작 안내 화면 */
+  .intro-wrap{padding:26px 2px 0;}
+  .intro-badge{display:inline-block;background:var(--sage);color:#1e3a29;font-weight:800;font-size:15px;padding:7px 16px;border-radius:999px;margin-bottom:16px;}
+  .intro-title{font-size:33px;line-height:1.22;letter-spacing:-1px;margin:0 0 18px;color:var(--ink);}
+  .intro-safe{background:#fff;border:2px solid var(--sage);border-radius:16px;padding:17px 18px;font-size:18px;line-height:1.62;color:var(--ink);margin-bottom:20px;}
+  .intro-how{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 18px;margin-bottom:22px;}
+  .ih-title{font-size:20px;font-weight:800;letter-spacing:-.5px;margin-bottom:16px;color:var(--ink);}
+  .ih-steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:15px;}
+  .ih-steps li{display:flex;gap:14px;align-items:flex-start;font-size:17.5px;line-height:1.5;color:var(--ink);}
+  .ih-steps .n{flex-shrink:0;width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;font-weight:800;font-size:16px;display:flex;align-items:center;justify-content:center;margin-top:1px;}
+  .ih-steps b{font-weight:700;}
+  .btn.intro-start{font-size:23px;padding:19px;background:var(--safe);}
 
   /* 대화 */
   .apptop{display:flex;align-items:center;gap:10px;padding:11px 16px;background:#fff;border-bottom:1px solid #e7e9ee;}
@@ -186,14 +198,37 @@
 <body>
 <div class="wrap">
 
+  <!-- 0. 시작 안내 -->
+  <section id="intro" class="screen on">
+    <div class="intro-wrap">
+      <span class="intro-badge">🛡️ 교육용 체험</span>
+      <h1 class="intro-title">사기 전화·문자<br>직접 겪어보기</h1>
+      <div class="intro-safe">
+        <b>이 화면은 진짜가 아닙니다.</b> 사기를 안전하게 체험해 보는 교육용 화면이에요.<br>
+        여기서 누르거나 적는 내용은 <b>어디에도 저장되지 않고, 아무에게도 전송되지 않습니다.</b> 안심하고 해보세요.
+      </div>
+      <div class="intro-how">
+        <div class="ih-title">이렇게 해보세요</div>
+        <ol class="ih-steps">
+          <li><span class="n">1</span><div>아래 <b>‘체험 시작’</b> 단추를 손가락으로 누르세요.</div></li>
+          <li><span class="n">2</span><div>휴대폰처럼 <b>알림</b>이 떠요. 그 <b>알림을 누르면</b> 문자나 전화가 열립니다.</div></li>
+          <li><span class="n">3</span><div>진짜처럼 <b>눌러 보고, 칸에 적어 보세요.</b> (실제 정보 말고 아무 예시나 괜찮아요.)</div></li>
+          <li><span class="n">4</span><div>빨간 <b>‘정보가 유출되었습니다’</b> 화면이 떠도 놀라지 마세요. 어떻게 당하는지 보여주는 거예요.</div></li>
+          <li><span class="n">5</span><div>이어서 나오는 <b>‘이렇게 하세요’</b>(대처법)까지 읽으면 끝이에요.</div></li>
+        </ol>
+      </div>
+      <button class="btn intro-start" onclick="show('home')">체험 시작 ▶</button>
+    </div>
+  </section>
+
   <!-- 1. 잠금화면 -->
-  <section id="home" class="screen on">
+  <section id="home" class="screen">
     <div class="phone"><div class="phone-in">
       <div class="statusbar dark"><span>오후 2:14</span><span>●●● &nbsp;📶 &nbsp;🔋</span></div>
       <div class="lockscreen">
         <div class="lock-clock"><div class="date">10월 28일 수요일</div><div class="time">2:14</div></div>
         <div class="notifs" id="notifs"></div>
-        <div class="swipe-hint">알림을 눌러 확인하세요</div>
+        <div class="swipe-hint">👆 알림을 손가락으로 눌러 보세요</div>
       </div>
     </div></div>
   </section>
